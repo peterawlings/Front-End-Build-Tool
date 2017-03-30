@@ -1,5 +1,3 @@
-# Gulp Starter for CSS Tricks Tutorial  
+# Gulp starter build for front end static sites.
 
-This repo is a gulp starter for this CSS Tricks tutorial. 
-
-Remember to do run the `npm install` command after cloning this repo :) 
+Includes Nunjucks for templating
