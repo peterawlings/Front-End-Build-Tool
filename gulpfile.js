@@ -20,26 +20,31 @@ var nunjucksRender = require('gulp-nunjucks-render');
 gulp.task('browserSync', function() {
   browserSync({
     server: {
-      baseDir: 'app/html'
+      baseDir: 'app'
     }
   })
 })
 
 gulp.task('sass', function() {
   return gulp.src('app/scss/**/*.scss') // Gets all files ending with .scss in app/scss and children dirs
+    .pipe(sourcemaps.init({identityMap: true})) // sourcemaps.init must go first
     .pipe(sass().on('error', sass.logError)) // Passes it through a gulp-sass, log errors to console
+      .pipe(sass())
+      .pipe(autoprefixer())
+    .pipe(sourcemaps.write())
     .pipe(gulp.dest('app/css')) // Outputs it in the css folder
     .pipe(browserSync.reload({ // Reloading with Browser Sync
       stream: true
     }));
-})
+});
 
+// TODO - put generated HTML files into a folder
 gulp.task('nunjucks', function() {
   // Gets .html and .nunjucks files in pages
-  return gulp.src('app/pages/**/*.+(html|njk)')
+  return gulp.src('app/templates/pages/*.+(html|njk)')
   // Renders template with nunjucks
   .pipe(nunjucksRender({
-      path: ['app/templates']
+      path: ['app/templates/components']
     }))
   // output files in app folder
   .pipe(gulp.dest('app'))

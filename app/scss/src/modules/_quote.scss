@@ -1,0 +1,108 @@
+/* ==========================================================================
+  Quote
+  ========================================================================== */
+$module: 'quote';
+
+.#{$module} {
+  text-align: center;
+  @include rem(margin, 0 auto $gutter-lg);
+
+  /* ==========================================================================
+  Elements
+  ========================================================================== */
+  &__excerpt {
+    font-family: $font-family-serif;
+  }
+
+  &__avatar {
+    display: block;
+    width: $avatar-lg;
+    height: $avatar-lg;
+    margin: 0 auto;
+    border-radius: 50%;
+    @include rem(margin, 0 auto $gutter-sm);
+  }
+
+  &__name, &__role {
+    display: block;
+    margin: 0;
+
+    @include rem(font-size, $h6-size);
+    @include rem(line-height, $h6-height);
+  }
+
+  &__name {
+    font-weight: $font-weight-bold;
+  }
+
+  &__role {
+
+  }
+
+  &__caption {
+
+  }
+
+  /* ==========================================================================
+  Modifiers
+  ========================================================================== */
+  &--subscriber {
+
+  }
+  
+  &--study {
+    .#{$module}__avatar {
+      width: $avatar-sm;
+      height: $avatar-sm;
+
+      @include media-breakpoint-up(lg) {
+        width: $avatar-lg;
+        height: $avatar-lg;
+        @include rem(margin, 0 auto $gutter-sm);
+      }
+    }
+  }
+
+  &--study, &--client {
+    .#{$module}__author {
+      @extend %table-layout;
+      margin: 0 auto;
+      @include clearfix();
+    }
+
+    .#{$module}__avatar {
+      @include rem(margin, 0 $gutter-xs 0 0);
+    }
+
+    .#{$module}__credit {
+      text-align: left;
+      white-space: nowrap;
+    }
+  }
+
+  &--client {
+    .#{$module}__excerpt {
+      text-align: left;
+    }
+
+    .#{$module}__author {
+      @include media-breakpoint-up(sm) {
+        margin: 0;
+      }
+    }
+
+    .#{$module}__avatar {
+      width: $avatar-sm;
+      height: $avatar-sm;
+    }
+  }
+
+  &--parallel {
+    .#{$module}__author {
+      @include media-breakpoint-up(md) {
+        @include center-horizontally;
+        bottom: $gutter-lg;
+      }
+    }
+  }
+}

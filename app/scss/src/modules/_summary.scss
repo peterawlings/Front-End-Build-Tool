@@ -1,0 +1,53 @@
+/* ==========================================================================
+  Summary
+  ========================================================================== */
+$module: 'summary';
+
+.#{$module} {
+  @include rem(margin, 0 0 $gutter-xl);
+
+  /* ==========================================================================
+  Elements
+  ========================================================================== */
+  &__heading {
+   
+  }
+
+  &__subheading {
+    font-weight: $font-weight-light;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    color: $yellow;
+  }
+
+  &__description {
+    font-weight: $font-weight-light;
+  }
+
+  &__condition {
+    display: block;
+    @include rem(margin, 0 0 $gutter-md);
+  }
+
+  /* ==========================================================================
+  Modifiers
+  ========================================================================== */
+  &--cta {
+    .#{$module}__heading {
+      @include rem(font-size, $h1-size);
+    }
+
+    .#{$module}__description {
+      @include rem(font-size, $h3-size);
+      @include rem(line-height, $h3-height);
+    }
+  }
+
+  &--study {
+    text-align: center;
+
+    .#{$module}__heading {
+      @include rem(margin, 0 0 $gutter-xs);
+    }
+  }
+}

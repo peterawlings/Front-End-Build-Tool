@@ -1,0 +1,45 @@
+/* ==========================================================================
+  Module
+  ========================================================================== */
+$module: 'client';
+
+.#{$module} {
+  /* ==========================================================================
+  Elements
+  ========================================================================== */
+  &__author {
+    @extend %table-layout;
+    @include clearfix();
+    @include rem(margin, 0 0 $gutter-md);
+  }
+
+  &__avatar {
+    width: $avatar-md;
+    height: $avatar-md;
+    @include rem(margin, 0 $gutter-xs 0 0);
+  }
+
+  &__credit {
+    text-align: left;
+    white-space: nowrap;
+    transform: translateY(-$gutter-xxs);
+  }
+
+  &__company {
+    margin: 0;
+    @include rem(font-size, $h3-size);
+    @include rem(line-height, $h3-height);
+
+    @include media-breakpoint-up(sm) {
+      
+    }
+  }
+
+  &__role {
+
+  }
+ 
+  /* ==========================================================================
+  Modifiers
+  ========================================================================== */
+}

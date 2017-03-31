@@ -1,0 +1,56 @@
+/* ==========================================================================
+   Mixins
+   ========================================================================== */
+
+@mixin rem($property, $px-values) {
+  $baseline-rem: $font-size-root/1rem;
+  #{$property}: $px-values;
+  
+  @if type-of($px-values) == "number" {
+    #{$property}: $px-values / $baseline-rem;
+  }
+  
+  @else {
+    $rem-values: unquote("");
+
+    @each $value in $px-values {
+      @if $value == 0 {
+        $rem-values: append($rem-values, $value);
+      }
+
+      @elseif $value == 'auto' {
+        $rem-values: append($rem-values, auto);
+      }
+
+      @elseif $value == '!important' {
+        $rem-values: append($rem-values, !important);
+      }
+
+      @else {
+        $rem-values: append($rem-values, $value/$baseline-rem);
+      }
+    }
+
+    #{$property}: $rem-values;
+  }
+}
+
+@mixin fontface($family, $src, $style: normal, $weight: normal) {
+  @font-face {
+    font-family: $family;
+    src: url('../fonts/#{$src}.eot'); // IE9 compat
+    src: url('../fonts/#{$src}.eot?#iefix') format('embedded-opentype'), // IE8 and below
+      url('../fonts/#{$src}.woff') format('woff'), // standards
+      url('../fonts/#{$src}.ttf') format('truetype'), // Safari, Android, iOS
+      url('../fonts/#{$src}.svg##{$family}') format('svg'); // legacy iOS
+
+    font-style: $style;
+    font-weight: $weight;
+  }
+}
+
+@mixin center-horizontally() {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}

@@ -1,0 +1,124 @@
+/* ==========================================================================
+   Variables
+   ========================================================================== */
+// Layout
+$gutter-xxs:          5px;
+$gutter-xs:           10px;
+$gutter-sm: 	        20px;
+$gutter-md: 	        30px;
+$gutter-lg: 	        50px;
+$gutter-xl: 	        75px;
+$gutter-xxl:          100px;
+
+// Colors
+$white:               #FFF;
+$black:               #000;
+$lightest-grey:       #EEEEEE;
+$lighter-grey:        #888888;
+$grey:                #555555;
+$dark-grey:           #2A2A2A;
+$darker-grey:         #252525;
+$yellow:              #E7D62E;
+$orange:              #FF7B00;
+$green:               #0ABFC3;
+$aqua:                #14C1EF;
+
+$colors: (
+  white:               $white,
+  black:               $black,
+  lightest-grey:       $lightest-grey,
+  lighter-grey:        $lighter-grey,
+  grey:                $grey,
+  dark-grey:           $dark-grey,
+  darker-grey:         $darker-grey,
+  yellow:              $yellow,
+  orange:              $orange,
+  green:               $green,
+  aqua:                $aqua,
+);
+
+// Type
+$font-family-sans-serif:    "GT-Walsheim-Pro", Arial, sans-serif;
+$font-family-serif:         Georgia, Times,"Times New Roman", serif;
+
+$font-weight-light:         100;
+$font-weight-regular:		    300;
+$font-weight-medium:        500;
+$font-weight-bold: 			    700;
+
+$font-size-root:            16px;
+$font-height-root:          22px;
+
+$h1-size-sm: 	              22px;
+$h1-size:                   36px;
+$h1-height:                 40px;
+
+$h2-size-sm: 	              20px;
+$h2-size:                   30px;
+$h2-height:                 40px;
+
+$h3-size-sm: 	              18px;
+$h3-height-sm:              24px;
+
+$h3-size:                   24px;
+$h3-height:                 32px;
+
+$h4-size-sm: 	              16px;
+$h4-size:                   22px;
+$h4-height:                 24px;
+
+$h5-size: 	                16px;
+$h5-height:                 24px;
+
+$h6-size: 	                12px;
+$h6-height:                 18px;
+
+$small-size:                14px;
+$small-height:              18px;
+
+$tiny-size:                 12px;
+$tiny-height:               18px;
+
+$list-height:               32px;
+
+// Links
+/* $body-color:             $grey-darkest;
+$link-color:                $red;
+$link-decoration:           none;
+$link-hover-color:          darken($red, 5);
+$link-hover-decoration:     underline; */
+
+// Icons
+$icon-xs:                   10px;
+$icon-sm:                   15px;
+$icon-md:                   20px;
+$icon-md:                   30px;
+$icon-lg:                   50px;
+
+// Avatar
+$avatar-sm:                 40px;
+$avatar-md:                 50px;
+$avatar-lg:                 95px;
+
+// Easing
+$ease-linear:               linear;
+$ease-in-out:               ease-in-out; 
+$ease-in-out-back:          cubic-bezier(0.740, -0.315, 0.525, 1.005); 
+$ease-out-quint:            cubic-bezier(0.230, 1.000, 0.320, 1.000); 
+$ease-in-out-quint:         cubic-bezier(0.860, 0.000, 0.070, 1.000);
+$ease-in-out-expo:          cubic-bezier(1.000, 0.000, 0.000, 1.000);
+
+/* ==========================================================================
+   Bootstrap
+   ========================================================================== */
+// Grid
+$enable-flex:             true;
+$grid-columns:            12;
+$grid-gutter-width:       30rem/16;
+
+// Forms
+$input-color:             $lighter-grey;
+$input-border-color:      $grey;
+$input-border-radius:     2px;
+$input-bg:                transparent;
+$input-line-height:       $h4-height;

@@ -1,0 +1,53 @@
+/* ==========================================================================
+  Button
+  ========================================================================== */
+$module: 'btn';
+
+.#{$module} {
+  display: inline-block;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  transition: 0.2s all $ease-linear;
+
+  &,
+  &:active,
+  &.active {
+    &:focus,
+    &.focus {
+      @include tab-focus();
+    }
+  }
+
+  /* ==========================================================================
+  Elements
+  ========================================================================== */
+ 
+  /* ==========================================================================
+  Modifiers
+  ========================================================================== */
+  &--block {
+    display: block;
+    width: 100%;
+  }
+
+  &--cta {
+    background-color: $yellow;
+    color: $dark-grey;
+    font-weight: $font-weight-bold;
+    text-decoration: none;
+    text-transform: uppercase;
+    border: 1px solid $yellow;
+    border-radius: 4px;
+    @include rem(padding, 15px $gutter-sm);
+    @include rem(font-size, $small-size);
+    @include rem(line-height, $small-height);
+
+    &:hover {
+      background-color: transparent;
+      color: $yellow;
+    }
+  }
+}

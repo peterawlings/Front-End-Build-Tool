@@ -1,0 +1,41 @@
+/* ==========================================================================
+  News
+  ========================================================================== */
+$module: 'news';
+
+.#{$module} {
+  /* ==========================================================================
+  Elements
+  ========================================================================== */
+  &__summary {
+    @extend %table-layout;
+    @include clearfix();
+    @include rem(margin, 0 0 $gutter-md);
+  }
+
+  &__avatar {
+    display: block;
+    width: $avatar-sm;
+    height: $avatar-sm;
+    border-radius: 4px;
+    @include rem(margin, 0 $gutter-xs 0 0);
+  }
+
+  &__heading, &__url {
+    display: block;
+  }
+
+  &__heading {
+    @include rem(margin, 0 0 $gutter-xxs);
+  }
+
+  &__url {
+    @include rem(font-size, $tiny-size);
+    @include rem(line-height, $tiny-height);
+  }
+
+
+  /* ==========================================================================
+  Modifiers
+  ========================================================================== */
+}
