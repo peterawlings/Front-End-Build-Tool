@@ -24,7 +24,7 @@ var gutil            = require('gulp-util');
 var paths = {
   css:      './app/assets/css/',
   html:     './app/templates/',
-  js:       './app/js/',
+  js:       './app/assets/js/',
   images:   './app/assets/images/',
   fonts:    './app/assets/fonts',
   icons:    './app/assets/icons',
@@ -142,7 +142,7 @@ gulp.task('cssbuild', function () {
 
 // Minify JS
 gulp.task('jsbuild', function () {
-  return gulp.src(paths.js + '/main.js')
+  return gulp.src(paths.js + 'main.js')
     .pipe(uglify().on('error', gutil.log))
     .pipe(plumber())
     .pipe(gulp.dest(paths.dist + 'js'))
