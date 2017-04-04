@@ -112,7 +112,7 @@ gulp.task('watch', function() {
   gulp.watch(paths.html + '**/*', ['nunjucks']);
   // gulp.watch('app/*.html', browserSync.reload);
   gulp.watch(paths.js + '/src/*.js', ['javascript']);
-})
+});
 
 // Optimization Tasks
 // ------------------
@@ -124,13 +124,13 @@ gulp.task('images', function() {
     .pipe(cache(imagemin({
       interlaced: true,
     })))
-    .pipe(gulp.dest(paths.dist + 'images'))
+    .pipe(gulp.dest(paths.dist + 'images'));
 });
 
 // Copying fonts
 gulp.task('fonts', function() {
   return gulp.src(paths.fonts + '**/*')
-    .pipe(gulp.dest(paths.dist + 'fonts'))
+    .pipe(gulp.dest(paths.dist + 'fonts'));
 });
 
 // Minify CSS
@@ -145,7 +145,7 @@ gulp.task('jsbuild', function () {
   return gulp.src(paths.js + 'main.js')
     .pipe(uglify().on('error', gutil.log))
     .pipe(plumber())
-    .pipe(gulp.dest(paths.dist + 'js'))
+    .pipe(gulp.dest(paths.dist + 'js'));
 });
 
 // Cleaning
@@ -153,7 +153,7 @@ gulp.task('clean', function() {
   return del.sync('dist').then(function(cb) {
     return cache.clearAll(cb);
   });
-})
+});
 
 gulp.task('clean:dist', function() {
   return del.sync([paths.dist + '**/*', !paths.dist + 'images', !paths.dist + 'images/**/*']);
@@ -165,8 +165,8 @@ gulp.task('clean:dist', function() {
 gulp.task('default', function(callback) {
   runSequence(['sass', 'browserSync'], 'watch',
     callback
-  )
-})
+  );
+});
 
 gulp.task('build', function(callback) {
   runSequence(
@@ -174,5 +174,5 @@ gulp.task('build', function(callback) {
     'sass',
     ['images', 'fonts', 'cssbuild', 'jsbuild', 'icons'],
     callback
-  )
-})
+  );
+});
