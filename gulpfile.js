@@ -21,9 +21,9 @@ var cheerio = require('gulp-cheerio');
 
 
 // TODO
-// - SVG Workflow
 // - Babel / ES6?
 // - Clear out JS files to use as base
+// - Clean up structure of gulp file - https://arwhd.co/2015/05/18/svg-gulp-workflow/
 
 // Development Tasks
 // -----------------
@@ -38,13 +38,13 @@ gulp.task('browserSync', function() {
 })
 
 gulp.task('sass', function() {
-  return gulp.src('app/scss/**/*.scss') // Gets all files ending with .scss in app/scss and children dirs
+  return gulp.src('app/assets/css/**/*.scss') // Gets all files ending with .scss in app/scss and children dirs
     .pipe(sourcemaps.init({identityMap: true})) // sourcemaps.init must go first
     .pipe(sass().on('error', sass.logError)) // Passes it through a gulp-sass, log errors to console
       .pipe(sass())
       .pipe(autoprefixer())
     .pipe(sourcemaps.write())
-    .pipe(gulp.dest('app/css')) // Outputs it in the css folder
+    .pipe(gulp.dest('app/assets/css')) // Outputs it in the css folder
     .pipe(browserSync.reload({ // Reloading with Browser Sync
       stream: true
     }));
@@ -60,12 +60,16 @@ gulp.task('nunjucks', function() {
     }))
   // output files in app folder
   .pipe(gulp.dest('app'))
+  .pipe(browserSync.reload({ // Reloading with Browser Sync
+    stream: true
+  }));
 });
 
+
 gulp.task('icons', function () {
-  return gulp.src('./src/assets/icons/*')
+  return gulp.src('app/assets/icons/*')
     .pipe(svgmin())
-    .pipe(svgstore({ fileName: 'icons.svg', inlineSvg: true}))
+    .pipe(svgstore())
     .pipe(cheerio({
       run: function ($, file) {
         $('svg').addClass('hide');
@@ -73,15 +77,16 @@ gulp.task('icons', function () {
       },
       parserOptions: { xmlMode: true }
     }))
-    .pipe(gulp.dest('./_includes/'));
+    .pipe(gulp.dest('app/templates/components/partials'));
 });
 
 // Watchers
 gulp.task('watch', function() {
-  gulp.watch('app/scss/**/*.scss', ['sass']);
-  gulp.watch('app/templates/**/*.njk', ['nunjucks']);
-  gulp.watch('app/*.html', browserSync.reload);
-  gulp.watch('app/js/**/*.js', ['javascript']);
+  gulp.watch('app/assets/css/**/*.scss', ['sass']);
+  gulp.watch('app/assets/icons/*', ['icons', 'nunjucks']);
+  gulp.watch('app/templates/**/*', ['nunjucks']);
+  // gulp.watch('app/*.html', browserSync.reload);
+  gulp.watch('app/assets/js/**/*.js', ['javascript']);
 })
 
 // Optimization Tasks
@@ -172,7 +177,7 @@ gulp.task('build', function(callback) {
   runSequence(
     'clean:dist',
     'sass',
-    ['images', 'fonts', 'cssbuild', 'jsbuild'],
+    ['images', 'fonts', 'cssbuild', 'jsbuild', 'icons'],
     callback
   )
 })
