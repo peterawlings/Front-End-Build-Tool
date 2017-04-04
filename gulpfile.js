@@ -20,9 +20,16 @@ var babel            = require('gulp-babel');
 var gutil            = require('gulp-util');
 
 
-// TODO
-// - Clear out JS files to use as base
-// - Clean up structure of gulp file - https://arwhd.co/2015/05/18/svg-gulp-workflow/
+// Config
+var paths = {
+  css:      './app/assets/css/',
+  html:     './app/templates/',
+  js:       './app/js/',
+  images:   './app/assets/images/',
+  fonts:    './app/assets/fonts',
+  icons:    './app/assets/icons',
+  dist:     './dist/'
+};
 
 // Development Tasks
 // -----------------
@@ -37,14 +44,14 @@ gulp.task('browserSync', function() {
 });
 
 gulp.task('sass', function() {
-  return gulp.src('app/assets/css/**/*.scss') // Gets all files ending with .scss in app/scss and children dirs
+  return gulp.src(paths.css + '**/*.scss') // Gets all files ending with .scss in app/scss and children dirs
     .pipe(sourcemaps.init({identityMap: true})) // sourcemaps.init must go first
     .pipe(sass().on('error', sass.logError)) // Passes it through a gulp-sass, log errors to console
       .pipe(sass())
       .pipe(autoprefixer())
     .pipe(sourcemaps.write())
     .pipe(plumber())
-    .pipe(gulp.dest('app/assets/css')) // Outputs it in the css folder
+    .pipe(gulp.dest(paths.css)) // Outputs it in the css folder
     .pipe(browserSync.reload({ // Reloading with Browser Sync
       stream: true
     }));
@@ -52,21 +59,21 @@ gulp.task('sass', function() {
 
 gulp.task('nunjucks', function() {
   // Gets .html and .nunjucks files in pages
-  return gulp.src('app/templates/pages/*.+(html|njk)')
+  return gulp.src(paths.html + 'pages/*.+(html|njk)')
   // Renders template with nunjucks
   .pipe(nunjucksRender({
-      path: ['app/templates/components']
+      path: [paths.html + 'components']
     }))
   // output files in app folder
   .pipe(plumber())
-  .pipe(gulp.dest('app'))
+  .pipe(gulp.dest('./app'))
   .pipe(browserSync.reload({ // Reloading with Browser Sync
     stream: true
   }));
 });
 
 gulp.task('icons', function () {
-  return gulp.src('app/assets/icons/*')
+  return gulp.src(paths.icons + '*')
     .pipe(plumber())
     .pipe(svgmin())
     .pipe(svgstore())
@@ -77,11 +84,11 @@ gulp.task('icons', function () {
       },
       parserOptions: { xmlMode: true }
     }))
-    .pipe(gulp.dest('app/templates/components/partials'));
+    .pipe(gulp.dest(paths.html + 'components/partials'));
 });
 
 gulp.task('javascript', function () {
-  return gulp.src('app/assets/js/src/**/*.js')
+  return gulp.src(paths.js + '/src/**/*.js')
     // Usage: Add this at top of JS file to specify depedency '// requires: libs/jquery.min.js'
     .pipe(deporder())
     // .pipe(uglify())
@@ -91,7 +98,7 @@ gulp.task('javascript', function () {
     .pipe(babel({
         presets: ['es2015']
     }))
-    .pipe(gulp.dest('app/assets/js'))
+    .pipe(gulp.dest('app/js'))
     .pipe(browserSync.reload({ // Reloading with Browser Sync
       stream: true
     }));
@@ -100,11 +107,11 @@ gulp.task('javascript', function () {
 
 // Watchers
 gulp.task('watch', function() {
-  gulp.watch('app/assets/css/**/*.scss', ['sass']);
-  gulp.watch('app/assets/icons/*', ['icons', 'nunjucks']);
-  gulp.watch('app/templates/**/*', ['nunjucks']);
+  gulp.watch(paths.css + '/**/*.scss', ['sass']);
+  gulp.watch(paths.icons + '*', ['icons', 'nunjucks']);
+  gulp.watch(paths.html + '**/*', ['nunjucks']);
   // gulp.watch('app/*.html', browserSync.reload);
-  gulp.watch('app/assets/js/src/*.js', ['javascript']);
+  gulp.watch(paths.js + '/src/*.js', ['javascript']);
 })
 
 // Optimization Tasks
@@ -112,33 +119,33 @@ gulp.task('watch', function() {
 
 // Optimizing Images
 gulp.task('images', function() {
-  return gulp.src('app/assets/images/**/*.+(png|jpg|jpeg|gif|svg)')
+  return gulp.src(paths.images + '**/*.+(png|jpg|jpeg|gif|svg)')
     // Caching images that ran through imagemin
     .pipe(cache(imagemin({
       interlaced: true,
     })))
-    .pipe(gulp.dest('dist/images'))
+    .pipe(gulp.dest(paths.dist + 'images'))
 });
 
 // Copying fonts
 gulp.task('fonts', function() {
-  return gulp.src('app/assets/fonts/**/*')
-    .pipe(gulp.dest('dist/fonts'))
+  return gulp.src(paths.fonts + '**/*')
+    .pipe(gulp.dest(paths.dist + 'fonts'))
 });
 
 // Minify CSS
 gulp.task('cssbuild', function () {
-  return gulp.src('app/assets/css/styles.css')
+  return gulp.src(paths.css + '/styles.css')
     .pipe(cssnano())
-    .pipe(gulp.dest('dist/css'));
+    .pipe(gulp.dest(paths.dist + 'css'));
 });
 
 // Minify JS
 gulp.task('jsbuild', function () {
-  return gulp.src('app/assets/js/main.js')
+  return gulp.src(paths.js + '/main.js')
     .pipe(uglify().on('error', gutil.log))
     .pipe(plumber())
-    .pipe(gulp.dest('dist/js'))
+    .pipe(gulp.dest(paths.dist + 'js'))
 });
 
 // Cleaning
@@ -149,7 +156,7 @@ gulp.task('clean', function() {
 })
 
 gulp.task('clean:dist', function() {
-  return del.sync(['dist/**/*', '!dist/images', '!dist/images/**/*']);
+  return del.sync([paths.dist + '**/*', !paths.dist + 'images', !paths.dist + 'images/**/*']);
 });
 
 // Build Sequences
