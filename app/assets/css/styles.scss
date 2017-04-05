@@ -3,12 +3,13 @@
 /* ==========================================================================
    Imports
    ========================================================================== */
-@import "variables";
 
 // Vendors
 @import "vendor/bootstrap/bootstrap";
 
+
 // Utilities
+@import "variables";
 @import "mixins";
 @import "placeholders";
 @import "helpers";

@@ -50,7 +50,9 @@ gulp.task('sass', function() {
       .pipe(sass())
       .pipe(autoprefixer())
     .pipe(sourcemaps.write())
-    .pipe(plumber())
+    .pipe(plumber({ errorHandler: function(err) {
+      gutil.beep();
+    }}))
     .pipe(gulp.dest(paths.css)) // Outputs it in the css folder
     .pipe(browserSync.reload({ // Reloading with Browser Sync
       stream: true
