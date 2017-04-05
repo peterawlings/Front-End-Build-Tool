@@ -110,7 +110,7 @@ gulp.task('javascript', function () {
 // Watchers
 gulp.task('watch', function() {
   gulp.watch(paths.css + '/**/*.scss', ['sass']);
-  gulp.watch(paths.icons + '*', ['icons', 'nunjucks']);
+  gulp.watch(paths.icons + '*', ['icons'], 'nunjucks');
   gulp.watch(paths.html + '**/*', ['nunjucks']);
   // gulp.watch('app/*.html', browserSync.reload);
   gulp.watch(paths.js + '/src/*.js', ['javascript']);

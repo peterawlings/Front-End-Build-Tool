@@ -9,7 +9,6 @@
   "author": "",
   "devDependencies": {
     "babel-preset-es2015": "^6.24.0",
-    "babili": "0.0.12",
     "browser-sync": "^2.7.12",
     "del": "^2.0.2",
     "gulp": "^3.9.0",
