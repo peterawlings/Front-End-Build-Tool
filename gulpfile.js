@@ -98,7 +98,7 @@ gulp.task('javascript', function () {
     .pipe(babel({
         presets: ['es2015']
     }))
-    .pipe(gulp.dest('app/js'))
+    .pipe(gulp.dest(paths.js))
     .pipe(browserSync.reload({ // Reloading with Browser Sync
       stream: true
     }));

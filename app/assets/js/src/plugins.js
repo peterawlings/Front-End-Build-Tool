@@ -1,5 +1,3 @@
-// requires: libs/jquery-3.2.0.js
-
 
 // Avoid `console` errors in browsers that lack a console.
 (function() {
