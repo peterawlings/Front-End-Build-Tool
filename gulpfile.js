@@ -26,8 +26,8 @@ var paths = {
   html:     './app/templates/',
   js:       './app/assets/js/',
   images:   './app/assets/images/',
-  fonts:    './app/assets/fonts',
-  icons:    './app/assets/icons',
+  fonts:    './app/assets/fonts/',
+  icons:    './app/assets/icons/',
   dist:     './dist/'
 };
 
