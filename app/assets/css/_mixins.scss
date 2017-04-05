@@ -5,11 +5,11 @@
 @mixin rem($property, $px-values) {
   $baseline-rem: $font-size-root/1rem;
   #{$property}: $px-values;
-  
+
   @if type-of($px-values) == "number" {
     #{$property}: $px-values / $baseline-rem;
   }
-  
+
   @else {
     $rem-values: unquote("");
 
@@ -53,4 +53,9 @@
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
+}
+
+// Mapping the colours in 'variables'
+@function colors($key: primary) {
+  @return map-get($colors, $key);
 }

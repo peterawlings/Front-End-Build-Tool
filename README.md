@@ -1,4 +1,4 @@
-# Gulp starter build for front end static sites.
+# Gulp starter for front end static site builds.
 
 Includes:
 
@@ -11,3 +11,5 @@ Includes:
 - Basic HTML layout page
 - Bootstrap 4 Alpha 6 scss
 - jQuery 3.2.0
+
+Download files and run 'npm install'
