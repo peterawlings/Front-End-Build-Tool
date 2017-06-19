@@ -14,4 +14,5 @@ Includes:
 
 Download files and run 'npm install'
 
-TODO: Add browserify - https://www.sitepoint.com/transpiling-es6-modules-to-amd-commonjs-using-babel-gulp/
+$ gulp - runs site
+$ gulp build - runs production build
