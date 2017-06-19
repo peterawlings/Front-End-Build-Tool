@@ -141,7 +141,8 @@ gulp.task('fonts', function() {
 
 // Minify CSS
 gulp.task('cssbuild', function () {
-  return gulp.src(paths.css + '/styles.css')
+  // return gulp.src(paths.css + '/styles.css')
+  return gulp.src(paths.dist + 'css/styles.css')
     .pipe(cssnano())
     .pipe(gulp.dest(paths.dist + 'css'));
 });
@@ -176,7 +177,7 @@ gulp.task('prettify', function() {
 // ---------------
 
 gulp.task('default', function(callback) {
-  runSequence(['sass', 'icons', 'nunjucks'], 'watch', 'browserSync',
+  runSequence(['sass', 'icons', 'nunjucks', 'javascript'], 'watch', 'browserSync',
     callback
   );
 });
@@ -187,7 +188,8 @@ gulp.task('build', function(callback) {
     'sass',
     'javascript',
     'nunjucks',
-    ['images', 'cssbuild', 'icons'],
+    ['images', 'icons'],
+    'cssbuild',
     'jsbuild',
     'prettify',
     callback
