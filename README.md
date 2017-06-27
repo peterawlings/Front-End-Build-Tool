@@ -12,7 +12,18 @@ Includes:
 - Bootstrap 4 Alpha 6 scss
 - jQuery 3.2.0
 
-Download files and run 'npm install'
+Download files and run:
 
-$ gulp - runs site
-$ gulp build - runs production build
+```javascript
+npm install
+```
+
+Run local dev:
+
+```javascript
+$ gulp
+```
+Run production build:
+```javascript
+$ gulp build
+```
