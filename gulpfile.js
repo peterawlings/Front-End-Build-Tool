@@ -117,7 +117,7 @@ gulp.task('watch', function() {
   gulp.watch(paths.icons + '*', ['icons'], 'nunjucks');
   gulp.watch(paths.images + '*', ['images']);
   gulp.watch(paths.html + '**/*', ['nunjucks']);
-  gulp.watch(paths.js + '/*.js', ['javascript']);
+  gulp.watch(paths.js + '**/*.js', ['javascript']);
 });
 
 // Optimization Tasks
