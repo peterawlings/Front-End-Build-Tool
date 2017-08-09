@@ -6,8 +6,6 @@ var browserSync      = require('browser-sync');
 var uglify           = require('gulp-uglify');
 var cssnano          = require('gulp-cssnano');
 var imagemin         = require('gulp-imagemin');
-var deporder         = require('gulp-deporder');
-var concat           = require('gulp-concat');
 var cache            = require('gulp-cache');
 var del              = require('del');
 var plumber          = require('gulp-plumber');
@@ -19,6 +17,10 @@ var cheerio          = require('gulp-cheerio');
 var babel            = require('gulp-babel');
 var gutil            = require('gulp-util');
 var prettify         = require('gulp-html-prettify');
+var browserify       = require('browserify');
+var babelify         = require('babelify');
+var source           = require('vinyl-source-stream');
+var buffer           = require('vinyl-buffer');
 
 // Config
 var paths = {
@@ -95,21 +97,19 @@ gulp.task('icons', function () {
 });
 
 gulp.task('javascript', function () {
-  return gulp.src(paths.js + '/src/**/*.js')
-    // Usage: Add this at top of JS file to specify depedency '// requires: libs/jquery.min.js'
-    .pipe(deporder())
-    .pipe(concat('main.js'))
-    .pipe(plumber())
-    // Force babel to transpile to es2015
-    .pipe(babel({
-        presets: [['es2015', {'modules': false}]]
-    }))
-    .pipe(gulp.dest(paths.dist + 'js'))
-    .pipe(browserSync.reload({ // Reloading with Browser Sync
+  return browserify({entries: paths.js + 'main.js', debug: true})
+      .transform("babelify", { presets: ["es2015"] })
+      .bundle()
+      .pipe(source('main.js'))
+      .pipe(buffer())
+      .pipe(sourcemaps.init())
+      .pipe(uglify())
+      .pipe(sourcemaps.write('./maps'))
+      .pipe(gulp.dest(paths.dist + 'js'))
+      .pipe(browserSync.reload({ // Reloading with Browser Sync
       stream: true
     }));
 });
-
 
 // Watchers
 gulp.task('watch', function() {
@@ -117,7 +117,7 @@ gulp.task('watch', function() {
   gulp.watch(paths.icons + '*', ['icons'], 'nunjucks');
   gulp.watch(paths.images + '*', ['images']);
   gulp.watch(paths.html + '**/*', ['nunjucks']);
-  gulp.watch(paths.js + '/src/*.js', ['javascript']);
+  gulp.watch(paths.js + '/*.js', ['javascript']);
 });
 
 // Optimization Tasks
