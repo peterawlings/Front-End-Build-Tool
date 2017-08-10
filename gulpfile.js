@@ -98,13 +98,13 @@ gulp.task('icons', function () {
 
 gulp.task('javascript', function () {
   return browserify({entries: paths.js + 'main.js', debug: true})
-      .transform("babelify", { presets: ["es2015"] })
+      .transform("babelify", { presets: ["es2015"], sourceMaps: true })
       .bundle()
       .pipe(source('main.js'))
       .pipe(buffer())
-      .pipe(sourcemaps.init())
+      .pipe(sourcemaps.init({loadMaps: true}))
       .pipe(uglify())
-      .pipe(sourcemaps.write('./maps'))
+      .pipe(sourcemaps.write('./'))
       .pipe(gulp.dest(paths.dist + 'js'))
       .pipe(browserSync.reload({ // Reloading with Browser Sync
       stream: true

@@ -3,3 +3,4 @@ export default function name() {
 	$('h1').css({color: 'red'});
 }
 console.log('test');
+console.log('test');
