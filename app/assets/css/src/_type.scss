@@ -10,6 +10,8 @@
 
 body {
   @include rem(font-size, $font-size-root);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* ==========================================================================
@@ -17,21 +19,23 @@ body {
    ========================================================================== */
 
  /*
+   TODO: Implement this
    .t1: largeest font
    .t2: second largeest font
    .t3: third largeest font
-   .s1: first font smaller than base font size
-   .s2: second font smaller than base font size
-   .s3: third font smaller than base font size
+   .t1: first font smaller than base font size
+   .t2: second font smaller than base font size
+   .t3: third font smaller than base font size
  */
 
 h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
   font-family: $font-family-sans-serif;
   font-weight: 700;
-  color: $grey;
+  // color: $grey;
 }
 
 h1, .h1 {
+  // TODO: Fix up line-height default to leave off units
   @include rem(font-size, $h1-size-sm);
   @include rem(line-height, $h1-height);
 
@@ -98,6 +102,8 @@ small {
 /* ==========================================================================
   Paragraphs, Lists
    ========================================================================== */
+
+// TODO: Remove conversions to REM apart from font-size - including 'spacing'. Copy from BS variables file
 p, ul, ol {
   @include rem(margin, 0 0 $gutter-md);
 }

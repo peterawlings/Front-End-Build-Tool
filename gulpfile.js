@@ -112,6 +112,7 @@ gulp.task('javascript', function () {
 });
 
 // Watchers
+// TODO: Fix image watch
 gulp.task('watch', function() {
   gulp.watch(paths.css + '/**/*.scss', ['sass']);
   gulp.watch(paths.icons + '*', ['icons'], 'nunjucks');

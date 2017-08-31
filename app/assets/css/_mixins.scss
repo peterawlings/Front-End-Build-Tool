@@ -2,6 +2,8 @@
    Mixins
    ========================================================================== */
 
+// TODO: Add useful mixins from other projects
+
 @mixin rem($property, $px-values) {
   $baseline-rem: $font-size-root/1rem;
   #{$property}: $px-values;
@@ -58,4 +60,11 @@
 // Mapping the colours in 'variables'
 @function colors($key: primary) {
   @return map-get($colors, $key);
+}
+
+// Add standard hero bg image behaviour
+@mixin stretch-bg-img ($img) {
+  background: url('../images/#{$img}') top left no-repeat;
+  background-size: cover;
+  background-position: 50%;
 }
