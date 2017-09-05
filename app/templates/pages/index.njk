@@ -1,11 +1,15 @@
 <!-- index.nunjucks -->
 {% extends "layout.njk" %}
 
+{# required to use macro #}
+{% import "macros/modules/macro-demo.njk" as macroDemo %}
+
 {% block content %}
 <h1>Title</h1>
 <!-- Adds the navigation partial -->
 {% include "partials/nav.njk" %}
 
+{{ macroDemo.macroDemo('2', 'My Name', 'copy here') }}
 <p>Some icons</p>
 <svg class="icon icon-anchor">
   <use xlink:href="#icon-anchor"></use>

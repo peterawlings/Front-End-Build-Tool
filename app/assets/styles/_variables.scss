@@ -10,6 +10,8 @@ $gutter-lg: 	        50px;
 $gutter-xl: 	        75px;
 $gutter-xxl:          100px;
 
+
+// TODO: Remove unnecessary colors for base
 // Colors
 $white:               #FFF;
 $black:               #000;
@@ -118,6 +120,8 @@ $ease-in-out-expo:          cubic-bezier(1.000, 0.000, 0.000, 1.000);
 $enable-flex:             true;
 $grid-columns:            12;
 $grid-gutter-width:       30rem/16;
+
+// TODO: Setting grid breakpoints? Working properly?
 
 // Forms
 $input-color:             $lighter-grey;

@@ -1,0 +1,7 @@
+{% macro macroDemo (img, title, copy) -%}
+<div class="col-md-3 team-profile">
+  <img class="team-profile__img img-fluid" src="../images/profile-{{img}}.jpg" alt="{{title}}">
+  <h5 class="team-profile__name">{{title}}</h5>
+  <h6>{{copy}}</h6>
+</div>
+{%- endmacro %}

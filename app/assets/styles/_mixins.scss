@@ -2,8 +2,6 @@
    Mixins
    ========================================================================== */
 
-// TODO: Add useful mixins from other projects
-
 @mixin rem($property, $px-values) {
   $baseline-rem: $font-size-root/1rem;
   #{$property}: $px-values;
@@ -51,10 +49,20 @@
   }
 }
 
-@mixin center-horizontally() {
+// Simple centerer
+@mixin absolute-center($horizontal: true, $vertical: true) {
   position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+  @if ($horizontal and $vertical) {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  } @else if ($horizontal) {
+    left: 50%;
+    transform: translate(-50%, 0);
+  } @else if ($vertical) {
+    top: 50%;
+    transform: translate(0, -50%);
+  }
 }
 
 // Mapping the colours in 'variables'
@@ -67,4 +75,16 @@
   background: url('../images/#{$img}') top left no-repeat;
   background-size: cover;
   background-position: 50%;
+}
+
+// Overide for Bootstrap mixin to remove 'before' char
+@mixin list-unstyled {
+  padding-left: 0;
+  list-style: none;
+  li {
+    padding: 0;
+    &:before {
+      content: '';
+    }
+  }
 }

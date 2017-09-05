@@ -5,7 +5,7 @@ Includes:
 - Nunjucks for templating
 - Autoprefixer
 - Sourcemaps
-- Babel (for ES2015 including ES2015 Modules ) 
+- Babel (for ES2015 including ES2015 Modules )
 - SVG Sprites
 - Minifcation and Concatenation for JS and CSS
 - Basic HTML layout page

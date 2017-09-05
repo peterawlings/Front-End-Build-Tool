@@ -24,9 +24,9 @@ var buffer           = require('vinyl-buffer');
 
 // Config
 var paths = {
-  css:      './app/assets/css/',
+  css:      './app/assets/styles/',
   html:     './app/templates/',
-  js:       './app/assets/js/',
+  js:       './app/assets/scripts/',
   images:   './app/assets/images/',
   fonts:    './app/assets/fonts/',
   icons:    './app/assets/icons/',
@@ -55,7 +55,7 @@ gulp.task('sass', function() {
       .pipe(sass())
       .pipe(autoprefixer())
     .pipe(sourcemaps.write())
-    .pipe(gulp.dest(paths.dist + 'css')) // Outputs it in the css folder
+    .pipe(gulp.dest(paths.dist + 'styles')) // Outputs it in the css folder
     .pipe(browserSync.reload({ // Reloading with Browser Sync
       stream: true
     }));
@@ -105,18 +105,18 @@ gulp.task('javascript', function () {
       .pipe(sourcemaps.init({loadMaps: true}))
       .pipe(uglify())
       .pipe(sourcemaps.write('./'))
-      .pipe(gulp.dest(paths.dist + 'js'))
+      .pipe(gulp.dest(paths.dist + 'scripts'))
       .pipe(browserSync.reload({ // Reloading with Browser Sync
       stream: true
     }));
 });
 
 // Watchers
-// TODO: Fix image watch
+// TODO: Fix image watch - and transfer on 'gulp'?
 gulp.task('watch', function() {
   gulp.watch(paths.css + '/**/*.scss', ['sass']);
-  gulp.watch(paths.icons + '*', ['icons'], 'nunjucks');
-  gulp.watch(paths.images + '*', ['images']);
+  gulp.watch(paths.icons + '**/*', ['icons'], 'nunjucks');
+  gulp.watch(paths.images + '**/*', ['images']);
   gulp.watch(paths.html + '**/*', ['nunjucks']);
   gulp.watch(paths.js + '**/*.js', ['javascript']);
 });
@@ -125,6 +125,7 @@ gulp.task('watch', function() {
 // ------------------
 
 // Optimizing Images
+// TODO: Use tinyPNG?
 gulp.task('images', function() {
   return gulp.src(paths.images + '**/*.+(png|jpg|jpeg|gif|svg)')
     // Caching images that ran through imagemin
@@ -143,18 +144,18 @@ gulp.task('fonts', function() {
 // Minify CSS
 gulp.task('cssbuild', function () {
   // return gulp.src(paths.css + '/styles.css')
-  return gulp.src(paths.dist + 'css/styles.css')
+  return gulp.src(paths.dist + 'styles/styles.css')
     .pipe(cssnano())
     .pipe(gulp.dest(paths.dist + 'css'));
 });
 
 // Minify JS
 gulp.task('jsbuild', function () {
-  return gulp.src(paths.dist + 'js/main.js')
+  return gulp.src(paths.dist + 'scripts/main.js')
     // .pipe(plumber())
     .pipe(uglify())
     // .pipe(uglify().on('error', gutil.log))
-    .pipe(gulp.dest(paths.dist + 'js'));
+    .pipe(gulp.dest(paths.dist + 'scripts'));
 });
 
 // Cleaning
